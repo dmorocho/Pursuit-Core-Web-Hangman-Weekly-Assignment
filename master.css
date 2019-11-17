@@ -1,0 +1,17 @@
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navbar {
+    overflow: hidden;
+    background-color:rgb(209, 125, 139);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    background-color:rgba(50, 137, 218, 0.712);
+  }
