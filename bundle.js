@@ -202,17 +202,17 @@ class View{
         p.innerText = "Please enter a letter:"
         let guessed= document.createElement("p");
         guessed.id="guessLetters";
-        let input = document.createElement("input");
-        input.id ="letterInput";
-        let button = document.createElement("button");
-        button.id="submitBtn"
-        button.innerText = "Submit";
+        // let input = document.createElement("input");
+        // input.id ="letterInput";
+        // let button = document.createElement("button");
+        // button.id="submitBtn"
+        // button.innerText = "Submit";
 
         boardDiv.appendChild(h1);
         boardDiv.appendChild(guessed);
         boardDiv.appendChild(p);
-        boardDiv.appendChild(input);
-        boardDiv.appendChild(button);
+        // boardDiv.appendChild(input);
+        // boardDiv.appendChild(button);
         this.el.appendChild(boardDiv);
         this.Letters()
     }
