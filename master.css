@@ -1,17 +1,49 @@
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  .navbar {
-    overflow: hidden;
-    background-color:rgb(209, 125, 139);
-    font-family: Arial, Helvetica, sans-serif;
+
+  #game{
+    background: grey;
+    width: 40%;    
+    border-radius: 5px;
   }
 
-  body {
-    background-color:rgba(50, 137, 218, 0.712);
+  body{
+    background: black;
+    color: white;
+    text-align: center;
+    /* display: grid; */
   }
+  #startImage{
+    
+
+  /* position: relative; */
+  width: 480px;
+  height: 360px;
+  }
+  #startdial{
+   
+    width: 400px;
+    height: 100px;
+    position: relative;
+    right: 450px;
+  }
+  #startGame{
+    
+    position: absolute;
+    top: 350px;
+    left: 460px;
+    height: 30px;
+    width: auto;
+
+  }
+
+
+  ul{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color:white;
+    list-style: none;
+    font-weight: 800;
+
+  }
+  li:hover, li:active {font-size: 250%;}

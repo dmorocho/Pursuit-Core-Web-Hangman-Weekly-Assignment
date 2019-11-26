@@ -10,12 +10,14 @@ const ComputerPlayer = require('./ComputerPlayer.js')
 const HumanPlayer = require('./HumanPlayer.js')
 const Board = require('./Board.js')
 
+
 class Game{
     constructor(name){
         this.computer = new ComputerPlayer()
         this.human = new HumanPlayer(name)
         this.board = new Board(this.computer.lengthSecretWord())
-        this.guessRemaining = 5
+        this.guessesRemaining = 6
+        this.guessLetters = []
    }
 
    // takes in the guesses remaing and put the lil dude at at index 
@@ -48,7 +50,6 @@ class Game{
     // Main Play function 
 playGame(){
     
-    let allguessLetters = []
     let secretWord = this.computer.word
     let message = "Guess the word or your coming with me!"
 
@@ -58,7 +59,7 @@ while(!this.isGameOver()){
     console.clear()
     this.displayAlien(this.guessRemaining)
     this.board.displayBoard();
-    console.log(allguessLetters.join())  
+    console.log(this.guessLetters.join())  
     console.log(message)
     console.log(`You have ${this.guessRemaining} remaining`)
     // console.log(secretWord) 
@@ -66,15 +67,15 @@ while(!this.isGameOver()){
 
 let guess = this.human.getMove()
 
-if (this.isValid(guess) && (!allguessLetters.includes(guess)) ){
+if (this.isValid(guess) && (!this.guessLetters.includes(guess)) ){
     
     if(secretWord.includes(guess)){
         console.log(secretWord)
         this.board.addChar(this.computer.word, guess);
-        allguessLetters.push(guess)
+        this.guessLetters.push(guess)
         message = "You Guessed Right"
     }else{
-    allguessLetters.push(guess)
+    this.guessLetters.push(guess)
     this.guessRemaining -= 1
     message = "You Guessed Wrong "
     }
@@ -118,12 +119,21 @@ isValid(guess){
 
 //checks if game is over
 isGameOver(){
-    if (this.guessesRemaining <= 0 || this.board.isComplete(this.computer.word)){
-        return true;
-    } else {
-        return false;
-    }
+    return this.guessesRemaining > 0 && !this.board.isComplete(this.computer.word)
 }
+
+
+isValidGuess (guess){
+    let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    let valid = false;
+    if(alphabet.includes(guess) && !this.guessLetters.includes(guess)){
+        valid = true;
+    }
+    return valid;
+}
+
+
+
 }
 export default Game;
 

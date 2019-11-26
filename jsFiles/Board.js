@@ -41,7 +41,8 @@ class Board{
     }
     //displays the board
     displayBoard(){
-        console.log(this.board.join(" "));
+       let currentBoard = this.board.join(" ")
+        return currentBoard
     }
 }
 
