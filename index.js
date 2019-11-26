@@ -13,7 +13,7 @@ el.appendChild(startImage)
 
 let startdial = document.createElement("img")
 startdial.id = "startdial"
-startdial.src ="./images/pixel-speech-bubble.gif"
+startdial.src ="./images/start-speech-bubble.gif"
 el.appendChild(startdial)
 
 let button = document.createElement("button")

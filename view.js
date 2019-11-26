@@ -14,17 +14,18 @@ class View{
             this.displayBoard();
             this.displayGuessed();
             this.displayImgs(this.game.guessesRemaining);
+            
             this.bindEvents();
         } else if(this.game.board.isComplete(this.game.computer.word)){
             this.displayBoard();
             this.removeItems();
-            // this.end(); 
+            this.end(); 
             
         } else {
-            // this.el.innerHTML = "";
-            // this.displayBoard();
-            // this.removeItems();
-            // this.end();
+            this.el.innerHTML = "";
+            this.displayBoard();
+            this.removeItems();
+            this.end();
             displayImgs(numGuesses)
             let h2 = document.createElement("h2");
             h2.innerText = `You ran out of guesses! You lose! The word was: ${this.game.computer.reveal()}`;
@@ -36,7 +37,7 @@ class View{
         if(this.game.board.isComplete(this.game.computer.word)){
             let h2 = document.createElement("h2");
             h2.innerText = "You won hangman! Congratulations winner!";
-            let boardDiv = document.querySelector("div");
+            let boardDiv = document.querySelector("gameDiv");
             boardDiv.appendChild(h2);
             let playAgainBtn = document.createElement("button");
             playAgainBtn.innerText = "Play again?"
@@ -46,7 +47,7 @@ class View{
         } else {
             let h2 = document.createElement("h2");
             h2.innerText = `You ran out of guesses! You lose! The word was: ${this.game.computer.reveal()}`;
-            let boardDiv = document.querySelector("div");
+            let boardDiv = document.querySelector("gameDiv");
             boardDiv.appendChild(h2);
             let playAgainBtn = document.createElement("button");
             playAgainBtn.innerText = "Play again?"
@@ -105,27 +106,21 @@ class View{
         p.innerText = "Please enter a letter:"
         let guessed= document.createElement("p");
         guessed.id="guessLetters";
-        // let input = document.createElement("input");
-        // input.id ="letterInput";
-        // let button = document.createElement("button");
-        // button.id="submitBtn"
-        // button.innerText = "Submit";
 
         boardDiv.appendChild(h1);
         boardDiv.appendChild(guessed);
         boardDiv.appendChild(p);
-        // boardDiv.appendChild(input);
-        // boardDiv.appendChild(button);
+
         this.el.appendChild(boardDiv);
-        this.Letters()
+        let guesses = this.game.guessLetters
+        this.Letters(guesses)
     }
 
     bindEvents(){
         let ul = document.querySelector("#guessdiv")
         ul.addEventListener("click", (e) => {
             
-           let input = e.toElement.innerText
-            
+            let input = e.toElement.innerText
             this.result(input)})
         // let button = document.querySelector("#submitBtn");
         // button.addEventListener("click", () => this.result());
@@ -159,7 +154,7 @@ class View{
         this.play();
     }
 
-    Letters(guess){
+    Letters(guesses){
         let guessDiv = document.querySelector("#guessdiv")
         guessDiv.innerHTML = ""
         let alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -168,8 +163,14 @@ class View{
         for(let i = 0; i< alpha.length; i++){
             let li = document.createElement("li")
             li.innerText=alpha[i]
-            if(this.game.guessLetters.includes(i)){
+         
+            
+            if(guesses.includes(alpha[i])){
+
+                li.style.color = "red"
+       
             }
+            
             ul.appendChild(li)
         }
 
