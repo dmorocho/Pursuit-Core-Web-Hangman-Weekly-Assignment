@@ -4,12 +4,15 @@ class View{
     constructor(game,el){
         this.game = game;
         this.el = el
-        this.readyAsh()
+        // this.readyAsh()
         this.play()
 
     }
-    
+
+
+
     play(){
+
         if(this.game.isGameOver()){
             this.displayBoard();
             this.displayGuessed();
@@ -26,6 +29,25 @@ class View{
        
         }
     }
+    //doesnt work
+    // readyAsh(){
+    //     this.el.innerHTML = "";
+
+    //     let Img = document.createElement("img");
+    //     let src = `./images/get_ready.gif`;
+        
+    //     Img.src = src;
+        
+        
+    //     this.el.appendChild(Img)
+
+    //     setInterval(function(){this.play(); },5000 )
+
+
+
+    // }
+
+
 
     
     // if they win/lose the game
@@ -86,7 +108,7 @@ class View{
         let img = document.createElement("img");
         let newSrc = `./images/hangman_${numGuesses}.jpg`;
         img.src = newSrc;
-        // debugger
+   
         imgDiv.appendChild(img);
         this.el.prepend(imgDiv);
     }
@@ -128,7 +150,8 @@ class View{
             this.result(input)
         })
     }
-    
+
+    // displays the users guesses 
     displayGuessed(){
         let guessLetters = document.querySelector("#guessLetters");
         if(this.game.guessLetters.length === 0){
@@ -141,9 +164,7 @@ class View{
 
     //takes in the input from bindevents 
     result(input){
-        // let input = document.querySelector("#letterInput")
         let h4 = document.querySelector("#guessesRemaining")
-        let p = document.querySelector("#enterGuess")
         if(this.game.isValidGuess(input.toLowerCase()) && !this.game.computer.word.includes(input.toLowerCase())){
             this.game.guessLetters.push(input.toLowerCase());
             this.game.guessesRemaining -= 1;
@@ -151,9 +172,9 @@ class View{
         } else if(this.game.isValidGuess(input.toLowerCase())){
             this.game.guessLetters.push(input.toLowerCase());
             this.game.board.addChar(this.game.computer.word, input.toLowerCase());
-            h4.innerText = `Correct guess! Nice! Guesses remaining: ${this.game.guessesRemaining}`;
+            h4.innerText = `Correct guess! Guesses remaining: ${this.game.guessesRemaining}`;
         } else {
-            h4.innerText = "Please enter a valid letter!! " + "Guesses Remaining: " + this.game.guessesRemaining;
+            h4.innerText = `Please enter valid Guess! Guesses Remaining: ${this.game.guessesRemaining}`;
         }
         this.play();
     }
@@ -183,7 +204,7 @@ class View{
         guessDiv.appendChild(ul)
 
     }
-
+    
 
     
     }
