@@ -151,12 +151,13 @@ class View{
     endGameWin(){
         let h4 = document.querySelector("#guessesRemaining");
         h4.innerHTML =""
-        let guess = document.querySelector("#guessdiv")
+
+        let guess = document.querySelector("#guessDiv")
         guess.innerHTML = ""
         this.el.innerHTML = "";
 
         let winImg = document.createElement("img");
-        let winSrc = `./images/win-speech-bubble.gif`;
+        let winSrc = `./images/win_Pokemon.gif`;
         winImg.src = winSrc;
         winImg.id = "winImg"
 
@@ -168,8 +169,9 @@ class View{
         let h2 = document.createElement("h2");
         h2.innerText = `The secret word was ${this.game.computer.word}`;
 
-        this.el.appendChild(h2)
+        this.el.appendChild(winImg)
         this.el.appendChild(img)
+        this.el.appendChild(h2)
         
 
 
@@ -179,13 +181,18 @@ class View{
 
 
     endGamelose(){
-        let guess = document.querySelector("#guessdiv")
+        let guess = document.querySelector("#guessDiv")
 
-        guess.innerHTML = ""
+        // guess.innerHTML = ""
         this.el.innerHTML = "";
 
+        let winImg = document.createElement("img");
+        let winSrc = `./images/win_Pokemon.gif`;
+        winImg.src = winSrc;
+        winImg.id = "winImg"
+
         let img = document.createElement("img");
-        let newSrc = `./images/win-speech-bubble.gif`;
+        let newSrc = `./images/lose-speech-bubble.gif`;
         img.src = newSrc;
 
         let h2 = document.createElement("h2");
@@ -193,6 +200,7 @@ class View{
 
         this.el.appendChild(h2)
         this.el.appendChild(img)
+        this.el.appendChild(winImg)
         
 
 
@@ -205,33 +213,35 @@ class View{
 
     // create new game
     newGame(){
-      
+        let guess = document.querySelector("#guessDiv")
         let playAgainBtn = document.createElement("button");
-        playAgainBtn.innerText = "Play again?"
+        playAgainBtn.innerText = "Play Again?"
         playAgainBtn.id = "playagain";
 
-        this.el.appendChild(playAgainBtn);
+        guess.appendChild(playAgainBtn);
 
         playAgainBtn.addEventListener("click", () => {
             playAgainBtn.parentNode.removeChild(playAgainBtn);
+
             let game = new _jsFiles_Game_js__WEBPACK_IMPORTED_MODULE_0__["default"](name);
             let el = document.querySelector("#gameDiv");
+
             new View(game,el);
         })
     }
 
-    removeItems(){
-        let p1 = document.querySelector("#enterGuess");
-        p1.parentNode.removeChild(p1);
-        let p2 = document.querySelector("#guessLetters");
-        p2.parentNode.removeChild(p2);
-        let input = document.querySelector("#letterInput");
-        input.parentNode.removeChild(input);
-        let btn = document.querySelector("#submitBtn");
-        btn.parentNode.removeChild(btn);
-        let h4 = document.querySelector("#guessesRemaining");
-        document.body.removeChild(h4)
-    }
+    // removeItems(){
+    //     let p1 = document.querySelector("#enterGuess");
+    //     p1.parentNode.removeChild(p1);
+    //     let p2 = document.querySelector("#guessLetters");
+    //     p2.parentNode.removeChild(p2);
+    //     let input = document.querySelector("#letterInput");
+    //     input.parentNode.removeChild(input);
+    //     let btn = document.querySelector("#submitBtn");
+    //     btn.parentNode.removeChild(btn);
+    //     let h4 = document.querySelector("#guessesRemaining");
+    //     document.body.removeChild(h4)
+    // }
 
     displayImgs(numGuesses){
         let imgDiv = document.createElement("div");
@@ -242,6 +252,8 @@ class View{
         imgDiv.appendChild(img);
         this.el.prepend(imgDiv);
     }
+
+    //displays: hangman image, guesses remaining, guessed letters
 
     displayBoard(){
         this.el.innerHTML = "";
@@ -269,14 +281,14 @@ class View{
         this.Letters(guesses)
     }
 
+    //waiting for click of a letter 
     bindEvents(){
-        let ul = document.querySelector("#guessdiv")
+        let ul = document.querySelector("#guessDiv")
         ul.addEventListener("click", (e) => {
             
             let input = e.toElement.innerText
-            this.result(input)})
-        // let button = document.querySelector("#submitBtn");
-        // button.addEventListener("click", () => this.result());
+            this.result(input)
+        })
     }
     
     displayGuessed(){
@@ -289,6 +301,7 @@ class View{
         }
     }
 
+    //takes in the input from bindevents 
     result(input){
         // let input = document.querySelector("#letterInput")
         let h4 = document.querySelector("#guessesRemaining")
@@ -307,8 +320,10 @@ class View{
         this.play();
     }
 
+    // creates letter list and turns red if letter is choosen
+
     Letters(guesses){
-        let guessDiv = document.querySelector("#guessdiv")
+        let guessDiv = document.querySelector("#guessDiv")
         guessDiv.innerHTML = ""
         let alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
@@ -335,51 +350,6 @@ class View{
     }
     
 
-
-    // displayboard() {
-    //     let gameDiv = document.createElement("div")
-    //     let currentboard = this.game.board.displayBoard()
-    //     gameDiv.id = "gameDiv"
-    //     let h1 = document.createElement("h1")
-    //     let input = document.createElement("input")
-    //     let button = document.createElement("button")
-    //     button.id = "guessBtn"
-    //     button.innerText = "submit guess"
-    //     h1.innerText = currentboard
-    //     this.displayHangman(this.game.guessRemaining)
-    //     gameDiv.appendChild(h1)
-    //     gameDiv.appendChild(input)
-    //     gameDiv.appendChild(button)
-    //     debugger
-    //     this.el.appendChild(gameDiv)
-    
-    // }
-    // blind(){
-    //     let button= document.querySelector("#guessBtn")
-
-    //     button.addEventListener("click",(e) =>{
-    //         let guess = document.querySelector("input")
-    //          //run guess
-    //         this.guess(guess)
-    //         debugger
-           
-
-    //     })
-    // }
-    // //play funtion
-    // // play ()
-    // //is game over?
-    // displayHangman(num){
-    //     let img = document.createElement("img")
-    //     let src ="./images/hangman_"+num+".jpg"
-    //     img.src = src
-    //     let hangmanDiv = document.createElement("div")
-    //     hangmanDiv.appendChild(img)
-    //     this.el.appendChild(hangmanDiv)
-    
-
-        
-    // }
 
     
 

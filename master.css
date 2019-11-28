@@ -11,13 +11,14 @@
     text-align: center;
     /* display: grid; */
   }
-  #startImage{
-    
 
-  /* position: relative; */
+  #startImage{
+  position: relative;
   width: 480px;
   height: 360px;
   }
+
+  
   #startdial{
    
     width: 400px;
@@ -57,4 +58,4 @@
     font-weight: 800;
 
   }
-  li:hover, li:active {font-size: 250%;}
+  li:hover, li:active {font-size: 200%;}
