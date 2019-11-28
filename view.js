@@ -4,9 +4,8 @@ class View{
     constructor(game,el){
         this.game = game;
         this.el = el
-
+        this.readyAsh()
         this.play()
-        
 
     }
     
@@ -18,39 +17,19 @@ class View{
             this.bindEvents();
             console.log(this.game.computer.word)
         } else if(this.game.board.isComplete(this.game.computer.word)){
-            this.endGameWin()   
+            let results = "win"
+            this.endGame(results)   
         } else {
-            // this.displayBoard();
-            // this.removeItems();
-            // this.end();
-            displayImgs(numGuesses)
-            let h2 = document.createElement("h2");
-            h2.innerText = `You ran out of guesses! You lose! The word was: ${this.game.computer.reveal()}`;
-            let boardDiv = document.querySelector("div");
+            
+            let results = "lose"
+            this.endGame(results) 
+       
         }
     }
 
-    end() {
-        if(this.game.board.isComplete(this.game.computer.word)){
-            // let h2 = document.createElement("h2");
-            // h2.innerText = "You won hangman! Congratulations winner!";
-            // let boardDiv = document.querySelector("gameDiv");
-            // boardDiv.appendChild(h2);
-            // let playAgainBtn = document.createElement("button");
-            // playAgainBtn.innerText = "Play again?"
-            // playAgainBtn.id = "playagain";
-            // boardDiv.appendChild(playAgainBtn);
-            // this.newGame();
-        } else {
-            let h2 = document.createElement("h2");
-            h2.innerText = `You ran out of guesses! You lose! The word was: ${this.game.computer.reveal()}`;
-            let boardDiv = document.querySelector("gameDiv");
-            boardDiv.appendChild(h2);
-            
-        }
-    }
-    // if they win the game
-    endGameWin(){
+    
+    // if they win/lose the game
+    endGame(result){
         let h4 = document.querySelector("#guessesRemaining");
         h4.innerHTML =""
 
@@ -59,14 +38,14 @@ class View{
         this.el.innerHTML = "";
 
         let winImg = document.createElement("img");
-        let winSrc = `./images/win_Pokemon.gif`;
+        let winSrc = `./images/${result}_Pokemon.gif`;
         winImg.src = winSrc;
-        winImg.id = "winImg"
+        winImg.class = "Img"
 
         let img = document.createElement("img");
-        let newSrc = `./images/win-speech-bubble.gif`;
+        let newSrc = `./images/${result}-speech-bubble.gif`;
         img.src = newSrc;
-        img.id = "windial"
+        img.id="dial"
 
         let h2 = document.createElement("h2");
         h2.innerText = `The secret word was ${this.game.computer.word}`;
@@ -78,37 +57,6 @@ class View{
 
 
         this.newGame();
-
-    }
-
-
-    endGamelose(){
-        let guess = document.querySelector("#guessDiv")
-
-        // guess.innerHTML = ""
-        this.el.innerHTML = "";
-
-        let winImg = document.createElement("img");
-        let winSrc = `./images/win_Pokemon.gif`;
-        winImg.src = winSrc;
-        winImg.id = "winImg"
-
-        let img = document.createElement("img");
-        let newSrc = `./images/lose-speech-bubble.gif`;
-        img.src = newSrc;
-
-        let h2 = document.createElement("h2");
-        h2.innerText = `The secret word was ${this.game.computer.word}`;
-
-        this.el.appendChild(h2)
-        this.el.appendChild(img)
-        this.el.appendChild(winImg)
-        
-
-
-        this.newGame();
-
-
 
     }
 
@@ -132,19 +80,7 @@ class View{
         })
     }
 
-    // removeItems(){
-    //     let p1 = document.querySelector("#enterGuess");
-    //     p1.parentNode.removeChild(p1);
-    //     let p2 = document.querySelector("#guessLetters");
-    //     p2.parentNode.removeChild(p2);
-    //     let input = document.querySelector("#letterInput");
-    //     input.parentNode.removeChild(input);
-    //     let btn = document.querySelector("#submitBtn");
-    //     btn.parentNode.removeChild(btn);
-    //     let h4 = document.querySelector("#guessesRemaining");
-    //     document.body.removeChild(h4)
-    // }
-
+    
     displayImgs(numGuesses){
         let imgDiv = document.createElement("div");
         let img = document.createElement("img");
@@ -247,6 +183,7 @@ class View{
         guessDiv.appendChild(ul)
 
     }
+
 
     
     }
