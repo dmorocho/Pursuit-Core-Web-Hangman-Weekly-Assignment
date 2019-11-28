@@ -95,6 +95,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _jsFiles_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./jsFiles/Game.js */ "./jsFiles/Game.js");
+
 class View{
 
     constructor(game,el){
@@ -111,18 +113,14 @@ class View{
             this.displayBoard();
             this.displayGuessed();
             this.displayImgs(this.game.guessesRemaining);
-            
             this.bindEvents();
+            console.log(this.game.computer.word)
         } else if(this.game.board.isComplete(this.game.computer.word)){
-            this.displayBoard();
-            this.removeItems();
-            this.end(); 
-            
+            this.endGameWin()   
         } else {
-            this.el.innerHTML = "";
-            this.displayBoard();
-            this.removeItems();
-            this.end();
+            // this.displayBoard();
+            // this.removeItems();
+            // this.end();
             displayImgs(numGuesses)
             let h2 = document.createElement("h2");
             h2.innerText = `You ran out of guesses! You lose! The word was: ${this.game.computer.reveal()}`;
@@ -132,34 +130,92 @@ class View{
 
     end() {
         if(this.game.board.isComplete(this.game.computer.word)){
-            let h2 = document.createElement("h2");
-            h2.innerText = "You won hangman! Congratulations winner!";
-            let boardDiv = document.querySelector("gameDiv");
-            boardDiv.appendChild(h2);
-            let playAgainBtn = document.createElement("button");
-            playAgainBtn.innerText = "Play again?"
-            playAgainBtn.id = "playagain";
-            boardDiv.appendChild(playAgainBtn);
-            this.newGame();
+            // let h2 = document.createElement("h2");
+            // h2.innerText = "You won hangman! Congratulations winner!";
+            // let boardDiv = document.querySelector("gameDiv");
+            // boardDiv.appendChild(h2);
+            // let playAgainBtn = document.createElement("button");
+            // playAgainBtn.innerText = "Play again?"
+            // playAgainBtn.id = "playagain";
+            // boardDiv.appendChild(playAgainBtn);
+            // this.newGame();
         } else {
             let h2 = document.createElement("h2");
             h2.innerText = `You ran out of guesses! You lose! The word was: ${this.game.computer.reveal()}`;
             let boardDiv = document.querySelector("gameDiv");
             boardDiv.appendChild(h2);
-            let playAgainBtn = document.createElement("button");
-            playAgainBtn.innerText = "Play again?"
-            playAgainBtn.id = "playagain";
-            boardDiv.appendChild(playAgainBtn);
-            this.newGame();
+            
         }
     }
+    // if they win the game
+    endGameWin(){
+        let h4 = document.querySelector("#guessesRemaining");
+        h4.innerHTML =""
+        let guess = document.querySelector("#guessdiv")
+        guess.innerHTML = ""
+        this.el.innerHTML = "";
 
+        let winImg = document.createElement("img");
+        let winSrc = `./images/win-speech-bubble.gif`;
+        winImg.src = winSrc;
+        winImg.id = "winImg"
+
+        let img = document.createElement("img");
+        let newSrc = `./images/win-speech-bubble.gif`;
+        img.src = newSrc;
+        img.id = "windial"
+
+        let h2 = document.createElement("h2");
+        h2.innerText = `The secret word was ${this.game.computer.word}`;
+
+        this.el.appendChild(h2)
+        this.el.appendChild(img)
+        
+
+
+        this.newGame();
+
+    }
+
+
+    endGamelose(){
+        let guess = document.querySelector("#guessdiv")
+
+        guess.innerHTML = ""
+        this.el.innerHTML = "";
+
+        let img = document.createElement("img");
+        let newSrc = `./images/win-speech-bubble.gif`;
+        img.src = newSrc;
+
+        let h2 = document.createElement("h2");
+        h2.innerText = `The secret word was ${this.game.computer.word}`;
+
+        this.el.appendChild(h2)
+        this.el.appendChild(img)
+        
+
+
+        this.newGame();
+
+
+
+    }
+
+
+    // create new game
     newGame(){
-        let playAgain = document.querySelector("#playagain")
-        playAgain.addEventListener("click", () => {
-            playAgain.parentNode.removeChild(playAgain);
-            let game = new Game(new Guesser("contestant"));
-            let el = document.querySelector("#hm");
+      
+        let playAgainBtn = document.createElement("button");
+        playAgainBtn.innerText = "Play again?"
+        playAgainBtn.id = "playagain";
+
+        this.el.appendChild(playAgainBtn);
+
+        playAgainBtn.addEventListener("click", () => {
+            playAgainBtn.parentNode.removeChild(playAgainBtn);
+            let game = new _jsFiles_Game_js__WEBPACK_IMPORTED_MODULE_0__["default"](name);
+            let el = document.querySelector("#gameDiv");
             new View(game,el);
         })
     }
@@ -182,7 +238,7 @@ class View{
         let img = document.createElement("img");
         let newSrc = `./images/hangman_${numGuesses}.jpg`;
         img.src = newSrc;
-
+        // debugger
         imgDiv.appendChild(img);
         this.el.prepend(imgDiv);
     }

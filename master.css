@@ -25,6 +25,17 @@
     position: relative;
     right: 450px;
   }
+  #windial{
+    width: 400px;
+    height: 100px;
+    position: relative;
+    right: 450px;
+
+
+  }
+
+
+
   #startGame{
     
     position: absolute;
