@@ -102,8 +102,8 @@ class View{
     constructor(game,el){
         this.game = game;
         this.el = el
-        // this.readyAsh()
         this.play()
+        
 
     }
 
@@ -127,7 +127,9 @@ class View{
        
         }
     }
-    //doesnt work
+
+    // doesnt work
+
     // readyAsh(){
     //     this.el.innerHTML = "";
 
@@ -139,8 +141,11 @@ class View{
         
     //     this.el.appendChild(Img)
 
-    //     setInterval(function(){this.play(); },5000 )
+    //     debugger
 
+    //     setTimeout(this.play(), 9000);
+
+    //     // debugger
 
 
     // }
@@ -239,9 +244,9 @@ class View{
         this.Letters(guesses)
     }
 
-    //waiting for click of a letter 
+    //waiting for click of a letter ul
     bindEvents(){
-        let ul = document.querySelector("#guessDiv")
+        let ul = document.querySelector("#letters")
         ul.addEventListener("click", (e) => {
             
             let input = e.toElement.innerText
@@ -285,6 +290,7 @@ class View{
         let alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
         let ul = document.createElement("ul")
+        ul.id ="letters"
         for(let i = 0; i< alpha.length; i++){
             let li = document.createElement("li")
             li.innerText=alpha[i]
