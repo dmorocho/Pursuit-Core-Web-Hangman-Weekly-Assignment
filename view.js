@@ -111,7 +111,8 @@ class View{
     displayImgs(numGuesses){
         let imgDiv = document.createElement("div");
         let img = document.createElement("img");
-        let newSrc = `./images/hangman_${numGuesses}.jpg`;
+        let newSrc = `./images/ash_${numGuesses}.jpg`;
+        img.id ="ash"
         img.src = newSrc;
    
         imgDiv.appendChild(img);
