@@ -46,7 +46,11 @@
     width: auto;
 
   }
+  #enterGuess{
+    width: 400px;
+    height: 100px;
 
+  }
 
   ul{
 

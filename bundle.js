@@ -229,15 +229,16 @@ class View{
         h4.id="guessesRemaining"
         document.body.appendChild(h4)
 
-        let p = document.createElement("p");
-        p.id="enterGuess";
-        p.innerText = "Please enter a letter:"
+        let img = document.createElement("img");
+        img.id="enterGuess";
+        img.src = "./images/game-speech-bubble.gif"
+
         let guessed= document.createElement("p");
         guessed.id="guessLetters";
 
         boardDiv.appendChild(h1);
         boardDiv.appendChild(guessed);
-        boardDiv.appendChild(p);
+        boardDiv.appendChild(img);
 
         this.el.appendChild(boardDiv);
         let guesses = this.game.guessLetters
