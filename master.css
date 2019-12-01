@@ -56,14 +56,14 @@
   height: 300px
   }
 
-  ul{
+  ul li {
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
   
     list-style: none;
     font-weight: 800;
 
   }
-  li:hover, li:active {font-size: 200%;}
+  li li:hover, li li:active {font-size: 125%;}

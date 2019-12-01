@@ -189,27 +189,73 @@ class View{
     // creates letter list and turns red if letter is choosen
 
     Letters(guesses){
+
+
         let guessDiv = document.querySelector("#guessDiv")
         guessDiv.innerHTML = ""
-        let alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
+        let alphaFirst = ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"]; 
+        let alphaSecond = ["b", "d", "f", "h", "j", "l", "n", "p", "r", "t", "v", "x", "z"];
         let ul = document.createElement("ul")
         ul.id ="letters"
-        for(let i = 0; i< alpha.length; i++){
+        let first_li = document.createElement("li")
+        let second_li = document.createElement("li")
+      
+        for(let i = 0; i< alphaFirst.length; i++){
             let li = document.createElement("li")
-            li.innerText=alpha[i]
-         
-            
-            if(guesses.includes(alpha[i])){
+            li.innerText=alphaFirst[i]
+
+            if(guesses.includes(alphaFirst[i])){
 
                 li.style.color = "red"
-       
             }
             
-            ul.appendChild(li)
+            first_li.appendChild(li)
         }
 
+        for(let i = 0; i< alphaSecond.length; i++){
+            let li = document.createElement("li")
+            li.innerText=alphaSecond[i]
+
+            if(guesses.includes(alphaSecond[i])){
+
+                li.style.color = "red"
+            }
+            
+            second_li.appendChild(li)
+        }
+
+
+
+
+        ul.appendChild(first_li)
+        
+        ul.appendChild(second_li)
+
         guessDiv.appendChild(ul)
+
+
+
+        // let guessDiv = document.querySelector("#guessDiv")
+        // guessDiv.innerHTML = ""
+        // let alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+        // let ul = document.createElement("ul")
+        // ul.id ="letters"
+        // for(let i = 0; i< alpha.length; i++){
+        //     let li = document.createElement("li")
+        //     li.innerText=alpha[i]
+         
+            
+        //     if(guesses.includes(alpha[i])){
+
+        //         li.style.color = "red"
+       
+        //     }
+            
+        //     ul.appendChild(li)
+        // }
+
+        // guessDiv.appendChild(ul)
 
     }
     
